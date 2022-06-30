@@ -1,35 +1,32 @@
 #!/usr/bin/python3
 """class FileStorage"""
+import json
 from models.base_model import BaseModel
 
-class FileStorage(BaseModel):
-    def __init__(self, file_path = None, objects = {}):
-        self._file_path = file_path
-        self._objects = objects
-        super().__init__()
-
-        @property
-        def file_path(self):
-            return self._file_path
-
-        @file_path.setter
-        def file_path(self, value):
-            if(type(value) is not str):
-                raise ValueError
-
-        @property
-        def objects(self):
-            return self._objects
-
-        @objects.setter
-        def objects(self, value):
-            return BaseModel.to_dict()
+class FileStorage:
+        __file_path = "path.json"
+        __objects = {}
 
         def all(self):
             return self.objects
 
         def new(self,obj):
-            #sets in __objects the obj with key <obj class name>.id
+            """sets in __objects the obj with key <obj class name>.id"""
+            our_key = "{}.{}".format(type(obj).name, obj.id
+            self.__objects[our_key] = obj
 
         def save(self):
-            #serializes __objects to the JSON file (path: __file_path
+            """serializes __objects to the JSON file (path: __file_path"""
+            dictionary = {}
+            for our_key, value in self.__objects.items():
+                dictionary[our_key] = value.to_dict()
+            with open(self.__file_path, "w", encoding='utf-8') as AJ:
+                json.dumps(dictionary, AJ)
+
+        def reload(self):
+            """deserializes the JSON file to __objects"""
+            try:
+                with open(self.__file_path, mode='r', encoding='utf-8') as AJ:
+                    self.__objects = json.load(AJ)
+            except IOError:
+                pass
