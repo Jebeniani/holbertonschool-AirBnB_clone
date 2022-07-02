@@ -4,9 +4,8 @@
 import cmd
 
 class HBNBCommand(cmd.Cmd):
-    def __init__(self,prompt_name='(hbnb)'):
-        super().__init__()
-        self.prompt_name = prompt_name
+    """CLI"""
+    prompt = '(hbnb)'
 
     def do_EOF(self, line):
         return True
