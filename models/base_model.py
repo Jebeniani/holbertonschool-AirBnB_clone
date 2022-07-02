@@ -12,7 +12,7 @@ class BaseModel:
         if kwargs:
             for arg, val in kwargs.items():
                 if arg in ('created_at', 'updated_at'):
-                    val = datetime.fromisoformat("2017-06-14T22:31:03.285259")
+                    val = datetime.fromisoformat("%Y-%m-%dT%H:%M:%S.%f")
 
                 if arg != '__class__':
                     setattr(self, arg, val)
