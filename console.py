@@ -2,6 +2,9 @@
 """class HBNBCommand"""
 
 import cmd
+import models
+from datetime import datetime
+from models.base_model import BaseModel
 
 
 class HBNBCommand(cmd.Cmd):
