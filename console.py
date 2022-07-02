@@ -13,7 +13,6 @@ from models.review import Review
 from models.user import User
 
 
-
 class HBNBCommand(cmd.Cmd):
     """cmd processor class"""
     prompt = '(hbnb)'
