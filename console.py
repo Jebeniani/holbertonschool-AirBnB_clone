@@ -3,6 +3,7 @@
 
 import cmd
 
+
 class HBNBCommand(cmd.Cmd):
     """CLI"""
     prompt = '(hbnb)'
