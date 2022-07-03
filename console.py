@@ -26,11 +26,11 @@ class HBNBCommand(cmd.Cmd):
         """Quit command to exit the program"""
         return True
 
-    def emptyline(self):
+    def do_emptyline(self):
         """emptyLine\n"""
     pass
 
-    def create(self, arg):
+    def do_create(self, arg):
         """Creates a new instance of BaseModel"""
         command = self.parseline(line)[0]
         if command is None:
@@ -42,7 +42,7 @@ class HBNBCommand(cmd.Cmd):
             new_obj.save()
             print(new_obj.id)
 
-    def show(self, line):
+    def do_show(self, line):
         """prints the string representation of an instance
         based on the class name and id"""
         command = self.parseline(line)[0]
@@ -60,7 +60,7 @@ class HBNBCommand(cmd.Cmd):
             else:
                 print(instance)
 
-    def destroy(self, line):
+    def do_destroy(self, line):
         """Deletes an instance based on the class name and id"""
         command = self.parseline(line)[0]
         arg = self.parseline(line)[1]
@@ -78,7 +78,7 @@ class HBNBCommand(cmd.Cmd):
             del models.storage.all()[instance]
             models.storage.save()
 
-    def to_all(self, line):
+    def do_all(self, line):
         """Prints all string representation of all instances
         based or not on the class name"""
         command = self.parseline(line)[0]
