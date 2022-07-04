@@ -12,10 +12,12 @@ from os import path
 
 
 class FileStorage:
+    """File Storage Class"""
     __file_path = "path.json"
     __objects = {}
 
     def all(self):
+        """returns the dictionary __objects"""
         return self.__objects
 
     def new(self, obj):
