@@ -16,9 +16,9 @@ from models.user import User
 
 class HBNBCommand(cmd.Cmd):
     """cmd processor class"""
-    prompt = '(hbnb)'
-    our_classes = ['BaseModel', 'State', 'City',
-            'Amenity', 'Place', 'Review', 'User']
+    prompt = "(hbnb)"
+    our_classes = ["BaseModel", "State", "City", "Amenity",
+                                "Place", "Review", "User"]
 
     def do_EOF(self, line):
         """EOF command to exit the program"""
