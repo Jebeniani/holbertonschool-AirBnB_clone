@@ -16,7 +16,8 @@ from models.user import User
 class HBNBCommand(cmd.Cmd):
     """cmd processor class"""
     prompt = '(hbnb)'
-    our_classes = ['BaseModel']
+    our_classes = ['BaseModel', 'State', 'City',
+            'Amenity', 'Place', 'Review', 'User']
 
     def do_EOF(self, line):
         """EOF command to exit the program"""
@@ -26,7 +27,7 @@ class HBNBCommand(cmd.Cmd):
         """Quit command to exit the program"""
         return True
 
-    def do_emptyline(self):
+    def emptyline(self):
         """emptyLine\n"""
     pass
 
@@ -71,11 +72,12 @@ class HBNBCommand(cmd.Cmd):
         elif arg == "":
             print("** instance id missing **")
         else:
-            instance = models.storage.all().get(command + "." + arg)
-        if instance is None:
+            key = command + "." + arg
+            inst = models.storage.all().get(key)
+        if inst is None:
             print("** no instance found **")
         else:
-            del models.storage.all()[instance]
+            del models.storage.all()[key]
             models.storage.save()
 
     def do_all(self, line):
@@ -94,6 +96,17 @@ class HBNBCommand(cmd.Cmd):
     def update(self, line):
         """Updates an instance based on the class name and id
         by adding or updating attribute"""
+        args = shlex.split(line)
+        args_size = len(args)
+        if args_size == 0:
+            print("** class name missing **")
+        elif args[0] not in self.our_classes:
+            print("** class doesn't exist **")
+        elif args_size == 1:
+            print("** instance id missing **")
+        else:
+            key = [args] + "." + args[1]
+            inst = models.storage.all().get(key)
 
 
 if __name__ == '__main__':
