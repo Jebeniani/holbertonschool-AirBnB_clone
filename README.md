@@ -1,4 +1,4 @@
-![alt](https://holbertonintranet.s3.amazonaws.com/uploads/medias/2018/6/65f4a1dd9c51265f49d0.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIARDDGGGOU5BHMTQX4%2F20220703%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Date=20220703T210747Z&X-Amz-Expires=86400&X-Amz-SignedHeaders=host&X-Amz-Signature=f12fce841ddc2fc30f3ee7cbb96bd80efd96990a8a16a5550c57ac90c64085e4)
+![alt](https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSU_1rJnPZeWqi_P9mYRVpAZwEv6rRD3TVsxQ&usqp=CAU)
 ##Welcome to the AirBnB clone project!
 
 **What’s a command interpreter?
