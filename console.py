@@ -1,6 +1,7 @@
 #!/usr/bin/python3
 """class HBNBCommand"""
 
+import shlex
 import cmd
 import models
 from datetime import datetime
@@ -31,7 +32,7 @@ class HBNBCommand(cmd.Cmd):
         """emptyLine\n"""
     pass
 
-    def do_create(self, arg):
+    def do_create(self, line):
         """Creates a new instance of BaseModel"""
         command = self.parseline(line)[0]
         if command is None:
@@ -74,11 +75,11 @@ class HBNBCommand(cmd.Cmd):
         else:
             key = command + "." + arg
             inst = models.storage.all().get(key)
-        if inst is None:
-            print("** no instance found **")
-        else:
-            del models.storage.all()[key]
-            models.storage.save()
+            if inst is None:
+                print("** no instance found **")
+            else:
+                del models.storage.all()[key]
+                models.storage.save()
 
     def do_all(self, line):
         """Prints all string representation of all instances
@@ -93,20 +94,36 @@ class HBNBCommand(cmd.Cmd):
         else:
             print("** class doesn't exist **")
 
-    def update(self, line):
+    def do_update(self, line):
         """Updates an instance based on the class name and id
         by adding or updating attribute"""
-        args = shlex.split(line)
-        args_size = len(args)
-        if args_size == 0:
+        models.storage.reload()
+        if len(line) == 0:
             print("** class name missing **")
-        elif args[0] not in self.our_classes:
-            print("** class doesn't exist **")
-        elif args_size == 1:
-            print("** instance id missing **")
+            return
         else:
-            key = [args] + "." + args[1]
-            inst = models.storage.all().get(key)
+            args = shlex.split(line)
+            if args[0] not in self.our_classes:
+                print("** instance id missing **")
+                return
+            key = args[0] + "." + args[1]
+            if key in models.storage.all():
+                inst = models.storage.all.get(key)
+                if len(args) < 3:
+                    print("** attribute name missing **")
+                elif len(args) < 4:
+                    print("** value missing **")
+                else:
+                    keys = args[2]
+                    try:
+                        attr = type(key[keys])
+                        value = attr(args[3])
+                    except KeyError:
+                        value = args[3]
+                        key[keys] = value
+                        models.storage.save()
+            else:
+                print("** no instance found **")
 
 
 if __name__ == '__main__':
